@@ -1,0 +1,466 @@
+---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 4/13/15 1:34 AM
+Description: Exception getting block type in world
+
+java.lang.OutOfMemoryError: Java heap space
+	at java.util.HashMap.resize(Unknown Source)
+	at java.util.HashMap.putVal(Unknown Source)
+	at java.util.HashMap.put(Unknown Source)
+	at java.util.HashSet.add(Unknown Source)
+	at net.minecraft.world.WorldServer.scheduleBlockUpdateWithPriority(WorldServer.java:475)
+	at net.minecraft.world.WorldServer.scheduleBlockUpdate(WorldServer.java:432)
+	at com.blaxout1213.dayz.BlockFallingBoulder.onBlockAdded(BlockFallingBoulder.java:35)
+	at net.minecraft.world.chunk.Chunk.func_150807_a(Chunk.java:713)
+	at net.minecraft.world.World.setBlock(World.java:519)
+	at net.minecraft.world.gen.feature.WorldGenMinable.generate(WorldGenMinable.java:79)
+	at com.blaxout1213.dayz.GenerateBoulders.generateSurface(GenerateBoulders.java:42)
+	at com.blaxout1213.dayz.GenerateBoulders.generate(GenerateBoulders.java:22)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:25)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.world.World.getBlock(World.java:393)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-997,8,-799), Chunk: (at 11,0,1 in -63,-50; contains blocks -1008,0,-800 to -993,255,-785), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+Stacktrace:
+	at net.minecraft.world.World.getBlock(World.java:393)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:25)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:37)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:84)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:37)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1147)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:25)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:47)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:37)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:84)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at net.minecraft.world.gen.feature.WorldGenLakes.generate(WorldGenLakes.java:25)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generateSurface(WorldGenAcidLakes.java:43)
+	at com.blaxout1213.dayz.WorldGenAcidLakes.generate(WorldGenAcidLakes.java:23)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:37)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.gen.feature.WorldGenLiquids.generate(WorldGenLiquids.java:37)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generateSurface(WorldGenAcidfalls.java:44)
+	at com.blaxout1213.dayz.WorldGenAcidfalls.generate(WorldGenAcidfalls.java:24)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1142)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at com.blaxout1213.dayz.WorldGenPoisonCactus.generate(WorldGenPoisonCactus.java:61)
+	at cpw.mods.fml.common.registry.GameRegistry.generateWorld(GameRegistry.java:106)
+	at net.minecraft.world.gen.ChunkProviderServer.populate(ChunkProviderServer.java:314)
+	at net.minecraft.world.chunk.Chunk.populateChunk(Chunk.java:1152)
+	at net.minecraft.world.gen.ChunkProviderServer.originalLoadChunk(ChunkProviderServer.java:208)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:149)
+	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:119)
+	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:221)
+	at net.minecraft.world.World.getChunkFromChunkCoords(World.java:482)
+	at net.minecraft.world.World.getBlock(World.java:387)
+	at net.minecraft.world.World.isAirBlock(World.java:410)
+	at net.minecraft.world.World.getTopBlock(World.java:371)
+	at com.blaxout1213.dayz.WorldProviderSurface2.canCoordinateBeSpawn(WorldProviderSurface2.java:30)
+	at net.minecraft.world.WorldServer.createSpawnPosition(WorldServer.java:794)
+	at net.minecraft.world.WorldServer.initialize(WorldServer.java:757)
+	at net.minecraft.world.World.<init>(World.java:296)
+	at net.minecraft.world.WorldServer.<init>(WorldServer.java:102)
+	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:63)
+	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:96)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:445)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:752)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-977,97,-794), Chunk: (at 15,6,6 in -62,-50; contains blocks -992,0,-800 to -977,255,-785), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-972,65,-785), Chunk: (at 4,4,15 in -61,-50; contains blocks -976,0,-800 to -961,255,-785), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-964,51,-768), Chunk: (at 12,3,0 in -61,-48; contains blocks -976,0,-768 to -961,255,-753), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-960,57,-771), Chunk: (at 0,3,13 in -60,-49; contains blocks -960,0,-784 to -945,255,-769), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-945,124,-757), Chunk: (at 15,7,11 in -60,-48; contains blocks -960,0,-768 to -945,255,-753), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-919,46,-762), Chunk: (at 9,2,6 in -58,-48; contains blocks -928,0,-768 to -913,255,-753), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-909,101,-737), Chunk: (at 3,6,15 in -57,-47; contains blocks -912,0,-752 to -897,255,-737), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-903,62,-721), Chunk: (at 9,3,15 in -57,-46; contains blocks -912,0,-736 to -897,255,-721), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-881,92,-694), Chunk: (at 15,5,10 in -56,-44; contains blocks -896,0,-704 to -881,255,-689), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-865,57,-684), Chunk: (at 15,3,4 in -55,-43; contains blocks -880,0,-688 to -865,255,-673), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-849,57,-668), Chunk: (at 15,3,4 in -54,-42; contains blocks -864,0,-672 to -849,255,-657), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-837,70,-655), Chunk: (at 11,4,1 in -53,-41; contains blocks -848,0,-656 to -833,255,-641), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-817,60,-639), Chunk: (at 15,3,1 in -52,-40; contains blocks -832,0,-640 to -817,255,-625), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-806,65,-622), Chunk: (at 10,4,2 in -51,-39; contains blocks -816,0,-624 to -801,255,-609), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-786,63,-606), Chunk: (at 14,3,2 in -50,-38; contains blocks -800,0,-608 to -785,255,-593), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-774,30,-592), Chunk: (at 10,1,0 in -49,-37; contains blocks -784,0,-592 to -769,255,-577), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-754,61,-578), Chunk: (at 14,3,14 in -48,-37; contains blocks -768,0,-592 to -753,255,-577), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-739,20,-555), Chunk: (at 13,1,5 in -47,-35; contains blocks -752,0,-560 to -737,255,-545), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-721,27,-534), Chunk: (at 15,1,10 in -46,-34; contains blocks -736,0,-544 to -721,255,-529), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-705,79,-529), Chunk: (at 15,4,15 in -45,-34; contains blocks -720,0,-544 to -705,255,-529), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-701,62,-533), Chunk: (at 3,3,11 in -44,-34; contains blocks -704,0,-544 to -689,255,-529), Region: (-2,-2; contains chunks -64,-64 to -33,-33, blocks -1024,0,-1024 to -513,255,-513)
+
+-- Requested block coordinates --
+Details:
+	Found chunk: true
+	Location: World: (-689,64,-509), Chunk: (at 15,4,3 in -44,-32; contains blocks -704,0,-512 to -689,255,-497), Region: (-2,-1; contains chunks -64,-32 to -33,-1, blocks -1024,0,-512 to -513,255,-1)
+
+-- Affected level --
+Details:
+	Level name: So scared
+	All players: 0 total; []
+	Chunk stats: ServerChunkCache: 3015 Drop: 0
+	Level seed: 5154665597744946509
+	Level generator: ID 01 - flat, ver 0. Features enabled: true
+	Level generator options: 2;7,230x1,5x3,2;3;biome_1,decoration,stronghold,mineshaft,dungeon
+	Level spawn location: World: (0,0,0), Chunk: (at 0,0,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 0 game time, 0 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (x86) version 6.3
+	Java Version: 1.8.0_25, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
+	Memory: 36738680 bytes (35 MB) / 1046937600 bytes (998 MB) up to 1046937600 bytes (998 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.85.1286 Minecraft Forge 10.13.2.1286 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available
+	FML{7.10.85.1286} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available
+	Forge{10.13.2.1286} [Minecraft Forge] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available
+	Venom{0.1} [Venom] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available->Available->Available->Available
+	Profiler Position: N/A (disabled)
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

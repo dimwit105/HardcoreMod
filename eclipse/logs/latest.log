@@ -1,0 +1,166 @@
+[06:14:03] [main/INFO]: Setting user: Player995
+[06:14:04] [Client thread/INFO]: LWJGL Version: 2.9.1
+[06:14:08] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Venom
+[06:14:09] [Sound Library Loader/INFO]: Sound engine started
+[06:14:12] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
+[06:14:12] [Client thread/INFO]: Created: 512x256 textures/items-atlas
+[06:14:12] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Venom
+[06:14:13] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
+[06:14:13] [Client thread/INFO]: Created: 512x256 textures/items-atlas
+[06:14:14] [Sound Library Loader/INFO]: Sound engine started
+[06:14:21] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[06:14:21] [Server thread/INFO]: Generating keypair
+[06:14:21] [Server thread/INFO]: Preparing start region for level 0
+[06:14:22] [Server thread/INFO]: Preparing spawn area: 64%
+[06:14:23] [Server thread/INFO]: Preparing spawn area: 84%
+[06:14:24] [Server thread/INFO]: Changing view distance to 8, from 10
+[06:14:24] [Server thread/INFO]: Player995[local:E:9b3e6222] logged in with entity id 226 at (339.81834190141876, 115.39050892356154, -239.3913866575787)
+[06:14:24] [Server thread/INFO]: Player995 joined the game
+[06:14:25] [Client thread/INFO]: [CHAT] The rank of this world is: Gold III
+[06:14:27] [Client thread/INFO]: Warning: Clientside chunk ticking took 691 ms
+[06:14:35] [Client thread/INFO]: Warning: Clientside chunk ticking took 163 ms
+[06:14:38] [Server thread/INFO]: Saving and pausing game...
+[06:14:38] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[06:14:40] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[06:14:40] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[06:14:40] [Server thread/INFO]: Stopping server
+[06:14:40] [Server thread/INFO]: Saving players
+[06:14:40] [Server thread/INFO]: Saving worlds
+[06:14:40] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[06:14:40] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[06:14:40] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[06:14:57] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[06:14:57] [Server thread/INFO]: Generating keypair
+[06:14:57] [Server thread/INFO]: Converting map!
+[06:14:57] [Server thread/INFO]: Scanning folders...
+[06:14:57] [Server thread/INFO]: Total conversion count is 0
+[06:14:58] [Server thread/INFO]: Preparing start region for level 0
+[06:14:59] [Server thread/INFO]: Changing view distance to 8, from 10
+[06:14:59] [Server thread/INFO]: Player995[local:E:b993bf67] logged in with entity id 4883 at (479.5, 4.0, 777.5)
+[06:14:59] [Server thread/INFO]: Player995 joined the game
+[06:14:59] [Client thread/INFO]: [CHAT] The rank of this world is: Gold III
+[06:15:03] [Server thread/INFO]: Player995 has just earned the achievement [Taking Inventory]
+[06:15:03] [Client thread/INFO]: [CHAT] Player995 has just earned the achievement [Taking Inventory]
+[06:17:05] [Server thread/INFO]: Saving and pausing game...
+[06:17:05] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:17:05] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:17:05] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:17:14] [Server thread/INFO]: Saving and pausing game...
+[06:17:14] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:17:14] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:17:14] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:19:08] [Server thread/INFO]: [Player995: Set own game mode to Survival Mode]
+[06:19:08] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:19:22] [Client thread/INFO]: [CHAT] There is no such item with ID 322:1
+[06:19:28] [Server thread/INFO]: [Player995: Set own game mode to Creative Mode]
+[06:19:28] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:19:38] [Server thread/INFO]: [Player995: Set own game mode to Survival Mode]
+[06:19:38] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:19:53] [Server thread/INFO]: Player995 fell into acid.
+[06:19:53] [Client thread/INFO]: [CHAT] Player995 fell into acid.
+[06:19:55] [Client thread/INFO]: [CHAT] The rank of this world is: Gold II
+[06:20:03] [Server thread/INFO]: [Player995: Set own game mode to Creative Mode]
+[06:20:03] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:21:12] [Server thread/INFO]: Saving and pausing game...
+[06:21:12] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:21:12] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:21:12] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:22:03] [Server thread/INFO]: Saving and pausing game...
+[06:22:03] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:22:03] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:22:03] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:22:32] [Server thread/INFO]: [Player995: Set own game mode to Survival Mode]
+[06:22:32] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:22:44] [Server thread/INFO]: Saving and pausing game...
+[06:22:44] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:22:44] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:22:44] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:22:48] [Server thread/INFO]: [Player995: Set own game mode to Creative Mode]
+[06:22:48] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:24:40] [Client thread/INFO]: [CHAT] OK, now to not bleed to death...
+[06:25:04] [Client thread/INFO]: [CHAT] OK, now to not bleed to death...
+[06:25:15] [Server thread/INFO]: Saving and pausing game...
+[06:25:15] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:25:15] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:25:15] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:25:22] [Server thread/INFO]: Saving and pausing game...
+[06:25:22] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:25:22] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:25:22] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:26:14] [Server thread/INFO]: Saving and pausing game...
+[06:26:14] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:26:14] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:26:14] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:26:18] [Server thread/INFO]: Player995 fell out of the world
+[06:26:18] [Client thread/INFO]: [CHAT] Player995 fell out of the world
+[06:26:18] [Client thread/INFO]: [CHAT] Ouch! That looked like it hurt
+[06:26:19] [Client thread/INFO]: [CHAT] The rank of this world is: Gold II
+[06:27:12] [Server thread/INFO]: Saving and pausing game...
+[06:27:12] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:27:12] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:27:12] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:31:24] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.witch.idle
+[06:31:29] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.witch.idle
+[06:32:16] [Server thread/INFO]: Saving and pausing game...
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:32:16] [Server thread/INFO]: Stopping server
+[06:32:16] [Server thread/INFO]: Saving players
+[06:32:16] [Server thread/INFO]: Saving worlds
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/Overworld
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/Nether
+[06:32:16] [Server thread/INFO]: Saving chunks for level 'demo'/The End
+[06:32:24] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[06:32:24] [Server thread/INFO]: Generating keypair
+[06:32:24] [Server thread/INFO]: Converting map!
+[06:32:24] [Server thread/INFO]: Scanning folders...
+[06:32:24] [Server thread/INFO]: Total conversion count is 0
+[06:32:25] [Server thread/INFO]: Preparing start region for level 0
+[06:32:26] [Server thread/INFO]: Changing view distance to 8, from 10
+[06:32:26] [Server thread/INFO]: Player995[local:E:db841b49] logged in with entity id 4374480 at (469.5, 4.0, 782.5)
+[06:32:26] [Server thread/INFO]: Player995 joined the game
+[06:32:26] [Client thread/INFO]: [CHAT] The rank of this world is: Gold III
+[06:32:27] [Server thread/INFO]: Player995 has just earned the achievement [Taking Inventory]
+[06:32:27] [Client thread/INFO]: [CHAT] Player995 has just earned the achievement [Taking Inventory]
+[06:32:36] [Server thread/INFO]: [Player995: Added 48000 to the time]
+[06:32:36] [Client thread/INFO]: [CHAT] Added 48000 to the time
+[06:32:52] [Server thread/INFO]: [Player995: Set the time to 47900]
+[06:32:52] [Client thread/INFO]: [CHAT] Set the time to 47900
+[06:33:36] [Server thread/INFO]: [Player995: Set own game mode to Survival Mode]
+[06:33:36] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:34:18] [Server thread/INFO]: [Player995: Set own game mode to Creative Mode]
+[06:34:18] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:35:42] [Server thread/INFO]: [Player995: Set own game mode to Survival Mode]
+[06:35:42] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[06:36:02] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:20] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:26] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:29] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:30] [Server thread/INFO]: Player995 was slain by Slime
+[06:36:30] [Client thread/INFO]: [CHAT] Player995 was slain by Slime
+[06:36:30] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:33] [Client thread/INFO]: [CHAT] The rank of this world is: Gold III
+[06:36:47] [Client thread/INFO]: [CHAT] All steves have been slain
+[06:36:54] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:36:58] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:37:13] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
+[06:37:26] [Server thread/INFO]: [Player995: Given [Bed] * 1 to Player995]
+[06:37:26] [Client thread/INFO]: [CHAT] Given [Bed] * 1 to Player995
+[06:37:31] [Server thread/INFO]: [Player995: Set game difficulty to Peaceful]
+[06:37:31] [Client thread/INFO]: [CHAT] Set game difficulty to Peaceful
+[06:37:33] [Server thread/INFO]: [Player995: Set game difficulty to Easy]
+[06:37:33] [Client thread/INFO]: [CHAT] Set game difficulty to Easy
+[06:37:44] [Server thread/INFO]: [Player995: Set the time to 18000]
+[06:37:44] [Client thread/INFO]: [CHAT] Set the time to 18000
+[06:37:56] [Server thread/INFO]: Saving and pausing game...
+[06:37:56] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/Overworld
+[06:37:56] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/Nether
+[06:37:56] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/The End
+[06:38:02] [Server thread/INFO]: Stopping server
+[06:38:02] [Server thread/INFO]: Saving players
+[06:38:02] [Server thread/INFO]: Saving worlds
+[06:38:02] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/Overworld
+[06:38:02] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/Nether
+[06:38:02] [Server thread/INFO]: Saving chunks for level 'Copy of demo'/The End
+[06:38:03] [Client thread/INFO]: Stopping!

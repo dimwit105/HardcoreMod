@@ -1,0 +1,85 @@
+death.attack.venom=%1$s didn't get an anti-dote in time.
+death.attack.hot=%1$s was too hot to live.
+death.attack.cold=%1$s became an ice sculpture.
+death.attack.error=%1$s moved folders around.
+death.attack.bleed=%1$s had a platelet deficiency.
+death.attack.zombieinfection=%1$s had a nasty infection.
+death.attack.sickness=%1$s caught a terrible disease.
+death.attack.corruption=%1$s turned corrupt.
+death.attack.badblood=%1$s used the wrong blood bag.
+death.attack.acid=%1$s fell into acid.
+
+entity.PoisonSpider.name=Poisonous Spider
+entity.CorruptZombie.name=Corrupted Zombie
+entity.SuicideSpider.name=Suicide Spider
+entity.EvilSteave.name=Steve
+entity.CivieSteve.name=Civilian
+entity.BoulderSpider.name=Guardian Spider
+entity.RedCreep.name=Steve (Red team)
+entity.GreenCreep.name=Steve (Green team)
+item.antidote.name=Anti-venom
+item.antidote2.name=Anti-venom
+item.omelet.name=Omelette
+item.bloodbag.name=Blood Bag
+item.venomsword.name=Envenomed sword
+item.endchunk.name=Endstone chunk
+item.bloodtest.name=Blood test kit
+item.phone.name=Phone
+item.epipen.name=Adrenaline
+item.seedcakeraw.name=Raw Seed Cake
+item.seedcakecooked.name=Seed Cake
+item.nightstick.name=Nightstick
+item.woodnightstick.name=Wooden Nightstick
+item.towel.name=Towel
+item.bandage.name=Bandage
+item.endsword.name=End sword
+item.acidbucket.name=Bucket of acid
+item.reinforcedooritem.name=Reinforced door
+item.netherstick.name=Netherstick
+item.null.name=Error, no item name
+cant.use=I can't use this.
+potion.sickness=Sick
+potion.badblood=Hemolytic Reation
+potion.corruption=Corrupted
+potion.nether=Nether-bound
+potion.tranquilized=Tranquilized
+moved.folders=I shouldn't have moved those folders...
+
+tile.poisoncake.name=Poisonous cake
+tile.poisoncactus.name=Poisonous Cactus
+tile.bitcoinminer.name=Mining Computer
+tile.cpuminer.name=CPU Mining Computer
+tile.gpuminer.name=GPU Mining Computer
+tile.asicminer.name=ASIC Mining Computer
+tile.curroption.name=Corruption
+tile.boulder.name=Boulder block
+tile.darkwater.name=Acid
+tile.reinforceddoor.name=Reinforced Door block
+
+bleed.bad0=I'm bleeding everywhere!
+bleed.bad1=Thats gushing with blood!
+bleed.bad2=OK, now to not bleed to death...
+
+bleed.normal0=There's alot of blood!
+bleed.normal1=I'm going to need a band-aid.
+bleed.normal2=Thats going to bleed...
+
+bleed.clot0=Well, the bleeding stopped.
+bleed.clot1=And the blood finally clotted.
+bleed.clot2=My bleeding stopped. Hurray!
+
+blood.O-=You have the blood type: O-
+blood.O+=You have the blood type: O+
+blood.A-=You have the blood type: A-
+blood.A+=You have the blood type: A+
+blood.B-=You have the blood type: B-
+blood.B+=You have the blood type: B+
+blood.AB-=You have the blood type: AB-
+blood.AB+=You have the blood type: AB+
+
+item.bitWood.name=Wooden Bitcoin
+item.bitBronze.name=Bronze Bitcoin
+item.bitSilver.name=Silver Bitcoin
+item.bitGold.name=Golden Bitcoin
+item.bitPlatnium.name=Platnium Bitcoin
+item.bitOrange.name=Orange Bitcoin

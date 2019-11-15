@@ -1,0 +1,135 @@
+---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 2/10/15 10:32 PM
+Description: Invalid Biome id
+
+java.lang.NullPointerException: Invalid Biome id
+	at net.minecraft.world.biome.WorldChunkManager.getRainfall(WorldChunkManager.java:88)
+	at net.minecraft.world.biome.BiomeCache$Block.<init>(BiomeCache.java:107)
+	at net.minecraft.world.biome.BiomeCache.getBiomeCacheBlock(BiomeCache.java:37)
+	at net.minecraft.world.biome.BiomeCache.getBiomeGenAt(BiomeCache.java:51)
+	at net.minecraft.world.biome.WorldChunkManager.getBiomeGenAt(WorldChunkManager.java:67)
+	at net.minecraft.world.chunk.Chunk.getBiomeGenForWorldCoords(Chunk.java:1406)
+	at net.minecraft.world.World.getBiomeGenForCoordsBody(World.java:177)
+	at net.minecraft.world.WorldProvider.getBiomeGenForCoords(WorldProvider.java:423)
+	at net.minecraft.world.World.getBiomeGenForCoords(World.java:166)
+	at net.minecraftforge.client.ForgeHooksClient.getSkyBlendColour(ForgeHooksClient.java:407)
+	at net.minecraft.world.World.getSkyColorBody(World.java:1791)
+	at net.minecraft.world.WorldProvider.getSkyColor(WorldProvider.java:457)
+	at net.minecraft.world.World.getSkyColor(World.java:1769)
+	at net.minecraft.client.renderer.EntityRenderer.updateFogColor(EntityRenderer.java:1760)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1230)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1087)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1056)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:78)
+	at GradleStart.main(GradleStart.java:45)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.world.biome.WorldChunkManager.getRainfall(WorldChunkManager.java:88)
+
+-- DownfallBlock --
+Details:
+	biome id: 0
+	downfalls[] size: 256
+	x: 0
+	z: 0
+	w: 16
+	h: 16
+Stacktrace:
+	at net.minecraft.world.biome.WorldChunkManager.getRainfall(WorldChunkManager.java:88)
+	at net.minecraft.world.biome.BiomeCache$Block.<init>(BiomeCache.java:107)
+	at net.minecraft.world.biome.BiomeCache.getBiomeCacheBlock(BiomeCache.java:37)
+	at net.minecraft.world.biome.BiomeCache.getBiomeGenAt(BiomeCache.java:51)
+	at net.minecraft.world.biome.WorldChunkManager.getBiomeGenAt(WorldChunkManager.java:67)
+	at net.minecraft.world.chunk.Chunk.getBiomeGenForWorldCoords(Chunk.java:1406)
+
+-- Coordinates of biome request --
+Details:
+	Location: World: (218,0,-323), Chunk: (at 10,0,13 in 13,-21; contains blocks 208,0,-336 to 223,255,-321), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+Stacktrace:
+	at net.minecraft.world.World.getBiomeGenForCoordsBody(World.java:177)
+	at net.minecraft.world.WorldProvider.getBiomeGenForCoords(WorldProvider.java:423)
+	at net.minecraft.world.World.getBiomeGenForCoords(World.java:166)
+	at net.minecraftforge.client.ForgeHooksClient.getSkyBlendColour(ForgeHooksClient.java:407)
+	at net.minecraft.world.World.getSkyColorBody(World.java:1791)
+	at net.minecraft.world.WorldProvider.getSkyColor(WorldProvider.java:457)
+	at net.minecraft.world.World.getSkyColor(World.java:1769)
+	at net.minecraft.client.renderer.EntityRenderer.updateFogColor(EntityRenderer.java:1760)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1230)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['Player968'/317, l='MpServer', x=236.73, y=84.00, z=-304.01]]
+	Chunk stats: MultiplayerChunkCache: 0, 0
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (172,64,252), Chunk: (at 12,4,12 in 10,15; contains blocks 160,0,240 to 175,255,255), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 10898 game time, 34898 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 13 total; [EntityCow['Cow'/322, l='MpServer', x=234.50, y=68.00, z=-299.50], EntityCow['Cow'/323, l='MpServer', x=236.28, y=68.00, z=-296.22], EntityCow['Cow'/324, l='MpServer', x=237.50, y=68.00, z=-299.50], EntityChicken['Chicken'/325, l='MpServer', x=225.53, y=66.00, z=-290.47], EntityClientPlayerMP['Player968'/317, l='MpServer', x=236.73, y=84.00, z=-304.01], EntityChicken['Chicken'/327, l='MpServer', x=219.84, y=64.00, z=-298.75], EntityChicken['Chicken'/328, l='MpServer', x=216.81, y=64.00, z=-300.59], EntityChicken['Chicken'/329, l='MpServer', x=217.50, y=66.00, z=-302.50], EntityChicken['Chicken'/330, l='MpServer', x=254.34, y=64.47, z=-289.81], EntityCow['Cow'/331, l='MpServer', x=241.31, y=68.00, z=-296.59], EntityChicken['Chicken'/332, l='MpServer', x=248.44, y=68.00, z=-299.53], EntityChicken['Chicken'/337, l='MpServer', x=255.50, y=67.00, z=-283.50], EntityCreeper['Creeper'/340, l='MpServer', x=229.50, y=37.00, z=-321.50]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:973)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:78)
+	at GradleStart.main(GradleStart.java:45)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (x86) version 6.3
+	Java Version: 1.8.0_25, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
+	Memory: 926086704 bytes (883 MB) / 1046937600 bytes (998 MB) up to 1046937600 bytes (998 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 3, tcache: 9, allocated: 13, tallocated: 123
+	FML: MCP v9.05 FML v7.10.85.1286 Minecraft Forge 10.13.2.1286 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.85.1286} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.2.1286} [Minecraft Forge] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Venom{0.1} [Venom] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Launched Version: 1.7.10
+	LWJGL: 2.9.1
+	OpenGL: GeForce GTX 980/PCIe/SSE2 GL version 4.5.0 NVIDIA 347.25, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: On (16)

@@ -1,0 +1,52 @@
+package com.blaxout1213.dayz;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.world.World;
+
+public class EntityTurret extends EntityGolem implements IRangedAttackMob 
+{
+	private static EntityTurret et;
+	public EntityTurret(World p_i1686_1_) 
+	{
+		super(p_i1686_1_);
+		et = this;
+	}
+    public static EntityTurret getEntity()
+    {
+        /** Set to 'this' in Minecraft constructor; used by some settings get methods */
+        return et;
+    }
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase p_82196_1_, float p_82196_2_) 
+	{
+        EntityArrow entityarrow = new EntityArrow(this.worldObj, this, p_82196_1_, 1.6F, (float)(14 - this.worldObj.difficultySetting.getDifficultyId() * 4));
+        int i = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
+        int j = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
+        entityarrow.setDamage((double)(p_82196_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting.getDifficultyId() * 0.11F));
+
+        if (i > 0)
+        {
+            entityarrow.setDamage(entityarrow.getDamage() + (double)i * 0.5D + 0.5D);
+        }
+
+        if (j > 0)
+        {
+            entityarrow.setKnockbackStrength(j);
+        }
+
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItem()) > 0)
+        {
+            entityarrow.setFire(100);
+        }
+
+        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.worldObj.spawnEntityInWorld(entityarrow);
+	}
+
+}

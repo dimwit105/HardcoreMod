@@ -1,0 +1,134 @@
+package com.blaxout1213.dayz;
+
+import java.util.Random;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class UtilMisc 
+{
+/**
+ * Util Class rules
+ * 1. Must be public
+ * 2. Must be static
+ * 3. Must be useful, at least in 1 case
+ */
+	private Random rand;
+	public static String bloodTypeString(int type)
+	{
+		if(type == 0)
+		{
+			return "O-";
+		}
+		if(type == 1)
+		{
+			return "O+";
+		}
+		if(type == 2)
+		{
+			return "A-";
+		}
+		if(type == 3)
+		{
+			return "A+";
+		}
+		if(type == 4)
+		{
+			return "B-";
+		}
+		if(type == 5)
+		{
+			return "B+";
+		}
+		if(type == 6)
+		{
+			return "AB-";
+		}
+		if(type == 7)
+		{
+			return "AB+";
+		}
+		return "Unreconized integer";
+	}
+    public static int getMoonPhase(long par1)
+    {
+        return (int)(par1 / 24000L % 8L + 8L) % 8;
+    }
+    public static Item randomItem(Random rand)
+    {
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.stick;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.bowl;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.bone;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.book;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.brick;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.clay_ball;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.coal;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.flint;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.gold_nugget;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.iron_ingot;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.melon;
+    	}
+    	if(rand.nextInt(6) == 0)
+    	{
+    		return Items.poisonous_potato;
+    	}
+		return Items.blaze_powder;
+    }
+    public static boolean isKO(EntityPlayer ep)
+    {
+    	if(ep.getDataWatcher().getWatchableObjectInt(26)/20 > (int)ep.getHealth())
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+    public static boolean isPlayerWalking(EntityPlayer ep)
+    {
+    	if(ep.motionX != 0 || ep.motionZ != 0)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+}

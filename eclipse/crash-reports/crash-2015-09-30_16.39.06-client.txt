@@ -1,0 +1,130 @@
+---- Minecraft Crash Report ----
+// Everything's going to plan. No, really, that was supposed to happen.
+
+Time: 9/30/15 4:39 PM
+Description: Rendering entity in world
+
+java.lang.IllegalArgumentException: Attempted to cancel a uncancelable event
+	at cpw.mods.fml.common.eventhandler.Event.setCanceled(Event.java:111)
+	at com.blaxout1213.dayz.PlayerStalker.onPlayerRender(PlayerStalker.java:554)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler_17_PlayerStalker_onPlayerRender_Post.invoke(.dynamic)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:54)
+	at cpw.mods.fml.common.eventhandler.EventBus.post(EventBus.java:138)
+	at net.minecraft.client.renderer.entity.RenderPlayer.doRender(RenderPlayer.java:171)
+	at net.minecraft.client.renderer.entity.RenderPlayer.doRender(RenderPlayer.java:565)
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:278)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntitySimple(RenderManager.java:251)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:527)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1300)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1087)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1056)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:951)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at cpw.mods.fml.common.eventhandler.Event.setCanceled(Event.java:111)
+	at com.blaxout1213.dayz.PlayerStalker.onPlayerRender(PlayerStalker.java:554)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler_17_PlayerStalker_onPlayerRender_Post.invoke(.dynamic)
+	at cpw.mods.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:54)
+	at cpw.mods.fml.common.eventhandler.EventBus.post(EventBus.java:138)
+	at net.minecraft.client.renderer.entity.RenderPlayer.doRender(RenderPlayer.java:171)
+	at net.minecraft.client.renderer.entity.RenderPlayer.doRender(RenderPlayer.java:565)
+
+-- Entity being rendered --
+Details:
+	Entity Type: null (net.minecraft.client.entity.EntityClientPlayerMP)
+	Entity ID: 967
+	Entity Name: Player493
+	Entity's Exact location: 956.56, 67.62, 249.12
+	Entity's Block location: World: (956,67,249), Chunk: (at 12,4,9 in 59,15; contains blocks 944,0,240 to 959,255,255), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.minecraft.client.renderer.entity.RenderPlayer@411e886b
+	Location: 0.00,0.00,0.00 - World: (0,0,0), Chunk: (at 0,0,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Rotation: 226.354
+	Delta: 0.18985903
+Stacktrace:
+	at net.minecraft.client.renderer.entity.RenderManager.func_147939_a(RenderManager.java:300)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntityStatic(RenderManager.java:278)
+	at net.minecraft.client.renderer.entity.RenderManager.renderEntitySimple(RenderManager.java:251)
+	at net.minecraft.client.renderer.RenderGlobal.renderEntities(RenderGlobal.java:527)
+	at net.minecraft.client.renderer.EntityRenderer.renderWorld(EntityRenderer.java:1300)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['Player493'/967, l='MpServer', x=956.56, y=67.62, z=249.12]]
+	Chunk stats: MultiplayerChunkCache: 125, 125
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (967,4,232), Chunk: (at 7,0,8 in 60,14; contains blocks 960,0,224 to 975,255,239), Region: (1,0; contains chunks 32,0 to 63,31, blocks 512,0,0 to 1023,255,511)
+	Level time: 29781 game time, 1144 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 168 total; [EntityChicken['Chicken'/515, l='MpServer', x=967.44, y=66.00, z=202.59], EntityZombie['Zombie'/516, l='MpServer', x=969.88, y=26.00, z=250.22], EntityPig['Pig'/772, l='MpServer', x=1028.75, y=66.00, z=190.13], EntityItem['item.item.dyePowder.black'/517, l='MpServer', x=967.88, y=47.13, z=257.53], EntityChicken['Chicken'/773, l='MpServer', x=1025.47, y=66.00, z=210.53], EntityItem['item.item.dyePowder.black'/518, l='MpServer', x=968.16, y=48.13, z=257.41], EntityChicken['Chicken'/774, l='MpServer', x=1031.98, y=66.00, z=234.86], EntityCivilianSteve['Civilian'/519, l='MpServer', x=977.89, y=66.00, z=268.00], EntityPig['Pig'/775, l='MpServer', x=1025.97, y=66.00, z=224.03], EntityItem['item.item.dyePowder.black'/520, l='MpServer', x=963.63, y=53.13, z=279.66], EntityItem['item.item.dyePowder.black'/521, l='MpServer', x=962.94, y=54.13, z=282.75], EntityItem['item.item.dyePowder.black'/522, l='MpServer', x=962.72, y=54.13, z=281.22], EntityBat['Bat'/2058, l='MpServer', x=1012.50, y=51.00, z=321.50], EntityItem['item.item.dyePowder.black'/523, l='MpServer', x=964.16, y=53.13, z=282.75], EntityItem['item.item.dyePowder.black'/524, l='MpServer', x=964.19, y=53.13, z=280.75], EntityItem['item.item.dyePowder.black'/525, l='MpServer', x=964.41, y=53.13, z=284.59], EntityCivilianSteve['Civilian'/526, l='MpServer', x=971.13, y=66.00, z=275.50], EntityCivilianSteve['Civilian'/527, l='MpServer', x=974.50, y=66.00, z=273.50], EntityClientPlayerMP['Player493'/967, l='MpServer', x=956.56, y=67.62, z=249.12], EntityCivilianSteve['Civilian'/528, l='MpServer', x=960.56, y=66.00, z=290.25], EntityCreeper['Creeper'/530, l='MpServer', x=961.06, y=66.00, z=306.56], EntityItem['item.item.dyePowder.black'/548, l='MpServer', x=980.28, y=58.13, z=191.19], EntityItem['item.item.dyePowder.black'/549, l='MpServer', x=981.16, y=60.13, z=190.75], EntityItem['item.item.dyePowder.black'/550, l='MpServer', x=979.31, y=60.13, z=189.88], EntityItem['item.item.dyePowder.black'/551, l='MpServer', x=979.34, y=58.13, z=191.63], EntityItem['item.item.dyePowder.black'/552, l='MpServer', x=980.69, y=59.13, z=190.78], EntityItem['item.item.dyePowder.black'/553, l='MpServer', x=977.19, y=59.13, z=191.78], EntityItem['item.item.dyePowder.black'/556, l='MpServer', x=978.41, y=58.13, z=191.31], EntityCivilianSteve['Civilian'/301, l='MpServer', x=913.50, y=66.00, z=198.50], EntityItem['item.item.dyePowder.black'/557, l='MpServer', x=976.88, y=60.13, z=193.91], EntityCivilianSteve['Civilian'/302, l='MpServer', x=915.59, y=66.00, z=226.69], EntityItem['item.item.dyePowder.black'/558, l='MpServer', x=979.00, y=60.13, z=194.09], EntityItem['item.item.dyePowder.black'/303, l='MpServer', x=925.59, y=59.13, z=251.78], EntityItem['item.item.dyePowder.black'/559, l='MpServer', x=977.13, y=59.13, z=192.63], EntityCivilianSteve['Civilian'/304, l='MpServer', x=919.47, y=66.00, z=251.19], EntityItem['item.item.dyePowder.black'/560, l='MpServer', x=977.81, y=59.13, z=193.88], EntityCivilianSteve['Civilian'/305, l='MpServer', x=926.41, y=66.00, z=261.25], EntityItem['item.item.dyePowder.black'/561, l='MpServer', x=980.19, y=58.13, z=192.32], EntityItem['item.item.dyePowder.black'/562, l='MpServer', x=978.13, y=60.13, z=194.16], EntityItem['item.item.dyePowder.black'/563, l='MpServer', x=978.66, y=58.13, z=193.50], EntityItem['item.item.dyePowder.black'/564, l='MpServer', x=978.38, y=58.13, z=192.60], EntityItem['item.item.dyePowder.black'/565, l='MpServer', x=979.59, y=58.13, z=193.88], EntityItem['item.item.dyePowder.black'/566, l='MpServer', x=980.66, y=58.13, z=192.76], EntityItem['item.item.dyePowder.black'/568, l='MpServer', x=980.03, y=59.13, z=193.88], EntityCivilianSteve['Civilian'/570, l='MpServer', x=981.50, y=66.00, z=210.50], EntityCivilianSteve['Civilian'/571, l='MpServer', x=978.22, y=66.00, z=213.22], EntityCivilianSteve['Civilian'/572, l='MpServer', x=981.50, y=66.00, z=214.50], EntityCivilianSteve['Civilian'/573, l='MpServer', x=975.78, y=66.00, z=220.41], EntityCivilianSteve['Civilian'/574, l='MpServer', x=979.59, y=66.00, z=219.66], EntityCivilianSteve['Civilian'/575, l='MpServer', x=984.50, y=66.00, z=228.50], EntityCivilianSteve['Civilian'/576, l='MpServer', x=987.50, y=66.00, z=225.50], EntityCivilianSteve['Civilian'/577, l='MpServer', x=986.50, y=66.00, z=228.50], EntityItem['item.item.dyePowder.black'/578, l='MpServer', x=984.38, y=58.13, z=247.13], EntityCivilianSteve['Civilian'/579, l='MpServer', x=978.50, y=66.00, z=270.50], EntityCivilianSteve['Civilian'/580, l='MpServer', x=976.65, y=66.00, z=276.02], EntityItem['item.item.arrow'/581, l='MpServer', x=978.34, y=34.13, z=275.13], EntityItem['item.item.bone'/582, l='MpServer', x=977.63, y=35.13, z=274.84], EntityItem['item.item.dyePowder.black'/583, l='MpServer', x=982.19, y=51.13, z=287.75], EntityItem['item.item.dyePowder.black'/584, l='MpServer', x=990.19, y=50.13, z=293.81], EntityItem['item.item.dyePowder.black'/585, l='MpServer', x=984.84, y=51.13, z=288.94], EntityItem['item.item.dyePowder.black'/586, l='MpServer', x=985.41, y=51.13, z=291.16], EntityItem['item.item.dyePowder.black'/587, l='MpServer', x=984.75, y=50.13, z=290.75], EntityItem['item.item.dyePowder.black'/588, l='MpServer', x=989.25, y=51.13, z=288.28], EntityItem['item.item.dyePowder.black'/589, l='MpServer', x=987.19, y=50.13, z=290.66], EntityItem['item.item.dyePowder.black'/590, l='MpServer', x=985.81, y=50.13, z=290.22], EntityItem['item.item.dyePowder.black'/591, l='MpServer', x=982.16, y=50.13, z=288.13], EntityItem['item.item.dyePowder.black'/592, l='MpServer', x=989.56, y=50.13, z=289.84], EntityItem['item.item.dyePowder.black'/593, l='MpServer', x=988.84, y=51.13, z=291.88], EntityItem['item.item.dyePowder.black'/594, l='MpServer', x=988.50, y=50.13, z=290.22], EntityItem['item.item.dyePowder.black'/595, l='MpServer', x=991.28, y=51.13, z=293.75], EntityItem['item.item.dyePowder.black'/596, l='MpServer', x=989.47, y=50.13, z=295.56], EntityItem['item.item.dyePowder.black'/597, l='MpServer', x=987.91, y=51.13, z=293.66], EntityItem['item.item.dyePowder.black'/598, l='MpServer', x=990.22, y=51.13, z=295.88], EntityItem['item.item.dyePowder.black'/599, l='MpServer', x=988.41, y=51.13, z=292.72], EntityItem['item.item.dyePowder.black'/600, l='MpServer', x=981.13, y=50.13, z=288.13], EntityItem['item.item.dyePowder.black'/601, l='MpServer', x=986.31, y=51.13, z=290.00], EntityItem['item.item.dyePowder.black'/602, l='MpServer', x=988.44, y=50.13, z=294.72], EntityItem['item.item.dyePowder.black'/603, l='MpServer', x=983.81, y=51.13, z=290.16], EntityItem['item.item.dyePowder.black'/604, l='MpServer', x=981.94, y=50.13, z=289.22], EntityItem['item.item.dyePowder.black'/605, l='MpServer', x=988.31, y=50.13, z=288.66], EntityItem['item.item.dyePowder.black'/606, l='MpServer', x=988.13, y=50.13, z=293.13], EntityCivilianSteve['Civilian'/607, l='MpServer', x=984.53, y=66.00, z=311.28], EntityItem['item.item.sulphur'/356, l='MpServer', x=942.28, y=35.13, z=227.53], EntityItem['item.item.dyePowder.black'/357, l='MpServer', x=937.06, y=46.13, z=271.88], EntityItem['item.item.dyePowder.black'/358, l='MpServer', x=939.50, y=46.13, z=271.66], EntityItem['item.item.dyePowder.black'/359, l='MpServer', x=939.97, y=45.13, z=273.81], EntityItem['item.item.dyePowder.black'/360, l='MpServer', x=942.22, y=46.13, z=275.91], EntityItem['item.item.dyePowder.black'/361, l='MpServer', x=941.41, y=45.13, z=272.78], EntityItem['item.item.dyePowder.black'/362, l='MpServer', x=936.59, y=45.13, z=273.91], EntityItem['item.item.dyePowder.black'/363, l='MpServer', x=939.91, y=45.13, z=275.88], EntityItem['item.item.dyePowder.black'/364, l='MpServer', x=938.22, y=46.13, z=272.84], EntityItem['item.item.dyePowder.black'/365, l='MpServer', x=937.91, y=46.13, z=274.31], EntityItem['item.item.dyePowder.black'/366, l='MpServer', x=938.94, y=45.13, z=273.22], EntityItem['item.item.dyePowder.black'/367, l='MpServer', x=935.63, y=46.13, z=275.19], EntityItem['item.item.dyePowder.black'/368, l='MpServer', x=939.31, y=45.13, z=272.22], EntityItem['item.item.dyePowder.black'/369, l='MpServer', x=943.25, y=46.13, z=273.22], EntityItem['item.item.dyePowder.black'/370, l='MpServer', x=935.28, y=45.13, z=273.81], EntityItem['item.item.dyePowder.black'/371, l='MpServer', x=941.25, y=45.13, z=275.53], EntityItem['item.item.dyePowder.black'/372, l='MpServer', x=937.31, y=45.13, z=272.13], EntityItem['item.item.dyePowder.black'/373, l='MpServer', x=938.88, y=46.13, z=275.09], EntityItem['item.item.dyePowder.black'/374, l='MpServer', x=939.97, y=45.13, z=274.59], EntityItem['item.item.dyePowder.black'/375, l='MpServer', x=937.13, y=46.13, z=274.59], EntityItem['item.item.dyePowder.black'/376, l='MpServer', x=942.16, y=45.13, z=273.75], EntityItem['item.item.dyePowder.black'/377, l='MpServer', x=943.13, y=46.13, z=274.16], EntityCivilianSteve['Civilian'/378, l='MpServer', x=934.69, y=66.00, z=283.31], EntityPoisonSpider['Poisonous Spider'/379, l='MpServer', x=933.00, y=66.00, z=272.75], EntityItem['item.item.dyePowder.black'/643, l='MpServer', x=1002.69, y=57.13, z=205.97], EntityItem['item.item.dyePowder.black'/644, l='MpServer', x=1003.13, y=56.13, z=205.88], EntityPig['Pig'/645, l='MpServer', x=997.94, y=66.00, z=197.31], EntityChicken['Chicken'/646, l='MpServer', x=1006.41, y=66.00, z=201.56], EntityItem['item.item.dyePowder.black'/647, l='MpServer', x=999.13, y=56.13, z=213.91], EntityItem['item.item.dyePowder.black'/648, l='MpServer', x=1002.13, y=56.13, z=213.75], EntityItem['item.item.dyePowder.black'/649, l='MpServer', x=999.56, y=56.13, z=213.13], EntityItem['item.item.dyePowder.black'/650, l='MpServer', x=1005.44, y=56.13, z=209.72], EntityItem['item.item.dyePowder.black'/651, l='MpServer', x=1001.72, y=57.13, z=215.09], EntityItem['item.item.dyePowder.black'/652, l='MpServer', x=1005.03, y=57.13, z=212.19], EntityItem['item.item.dyePowder.black'/653, l='MpServer', x=999.63, y=57.13, z=215.13], EntityItem['item.item.dyePowder.black'/654, l='MpServer', x=1006.34, y=56.13, z=209.81], EntityItem['item.item.dyePowder.black'/655, l='MpServer', x=1003.03, y=57.13, z=214.53], EntityItem['item.item.dyePowder.black'/656, l='MpServer', x=1006.22, y=56.13, z=211.22], EntityItem['item.item.dyePowder.black'/657, l='MpServer', x=1007.32, y=57.13, z=209.94], EntityItem['item.item.dyePowder.black'/658, l='MpServer', x=1004.13, y=56.13, z=209.44], EntityItem['item.item.dyePowder.black'/659, l='MpServer', x=1002.88, y=56.13, z=214.88], EntityItem['item.item.dyePowder.black'/660, l='MpServer', x=1001.06, y=56.13, z=214.13], EntityItem['item.item.dyePowder.black'/661, l='MpServer', x=1000.47, y=57.13, z=213.00], EntityItem['item.item.dyePowder.black'/662, l='MpServer', x=1004.44, y=56.13, z=210.72], EntityCivilianSteve['Civilian'/663, l='MpServer', x=995.74, y=66.00, z=244.08], EntityItem['item.item.dyePowder.black'/664, l='MpServer', x=1006.50, y=46.13, z=292.69], EntityItem['item.item.dyePowder.black'/665, l='MpServer', x=1005.94, y=47.13, z=293.38], EntityItem['item.tile.dirt.default'/436, l='MpServer', x=951.25, y=65.13, z=250.13], EntityItem['item.item.dyePowder.black'/437, l='MpServer', x=956.06, y=56.13, z=276.25], EntityItem['item.item.dyePowder.black'/438, l='MpServer', x=954.66, y=56.13, z=276.03], EntityItem['item.item.dyePowder.black'/439, l='MpServer', x=955.13, y=56.13, z=274.13], EntityCivilianSteve['Civilian'/440, l='MpServer', x=959.56, y=66.00, z=275.25], EntityCivilianSteve['Civilian'/441, l='MpServer', x=944.50, y=66.00, z=302.50], EntityItem['item.item.sulphur'/442, l='MpServer', x=957.91, y=25.13, z=305.31], EntityChicken['Chicken'/706, l='MpServer', x=1023.81, y=66.00, z=220.34], EntityBat['Bat'/195, l='MpServer', x=911.47, y=36.10, z=197.47], EntityChicken['Chicken'/707, l='MpServer', x=1009.59, y=66.00, z=228.41], EntityItem['item.item.dyePowder.black'/196, l='MpServer', x=906.88, y=54.13, z=257.22], EntityCivilianSteve['Civilian'/708, l='MpServer', x=1015.50, y=66.00, z=246.50], EntityItem['item.item.dyePowder.black'/197, l='MpServer', x=906.13, y=54.13, z=257.94], EntityCivilianSteve['Civilian'/709, l='MpServer', x=1013.50, y=66.00, z=241.50], EntityItem['item.item.dyePowder.black'/198, l='MpServer', x=906.28, y=54.13, z=258.88], EntityCivilianSteve['Civilian'/710, l='MpServer', x=1012.50, y=66.00, z=243.50], EntityItem['item.item.dyePowder.black'/199, l='MpServer', x=900.81, y=49.13, z=283.75], EntityCivilianSteve['Civilian'/711, l='MpServer', x=1013.50, y=66.00, z=246.50], EntityItem['item.item.dyePowder.black'/200, l='MpServer', x=901.78, y=48.13, z=283.34], EntityZombie['Zombie'/712, l='MpServer', x=1012.50, y=17.00, z=279.50], EntityItem['item.item.dyePowder.black'/201, l='MpServer', x=902.03, y=49.13, z=285.28], EntityItem['item.item.dyePowder.black'/713, l='MpServer', x=1008.50, y=47.13, z=291.88], EntityItem['item.item.dyePowder.black'/202, l='MpServer', x=907.00, y=49.13, z=286.84], EntityItem['item.item.dyePowder.black'/203, l='MpServer', x=902.44, y=49.13, z=284.16], EntityItem['item.item.dyePowder.black'/715, l='MpServer', x=1009.06, y=47.13, z=293.13], EntityItem['item.item.dyePowder.black'/204, l='MpServer', x=902.00, y=50.13, z=286.13], EntityItem['item.item.dyePowder.black'/205, l='MpServer', x=901.25, y=49.13, z=282.53], EntityItem['item.item.dyePowder.black'/206, l='MpServer', x=904.88, y=49.13, z=282.91], EntityItem['item.item.dyePowder.black'/207, l='MpServer', x=905.34, y=50.13, z=283.03], EntityItem['item.item.dyePowder.black'/208, l='MpServer', x=906.13, y=49.13, z=285.78], EntityItem['item.item.dyePowder.black'/720, l='MpServer', x=1008.09, y=46.13, z=293.88], EntityItem['item.item.dyePowder.black'/209, l='MpServer', x=904.22, y=49.13, z=284.63], EntityItem['item.item.dyePowder.black'/210, l='MpServer', x=904.16, y=50.13, z=281.91], EntityItem['item.item.dyePowder.black'/211, l='MpServer', x=904.09, y=49.13, z=283.31], EntityItem['item.item.dyePowder.black'/212, l='MpServer', x=901.78, y=49.13, z=281.28], EntityItem['item.item.dyePowder.black'/213, l='MpServer', x=902.78, y=49.13, z=285.09], EntityItem['item.item.dyePowder.black'/214, l='MpServer', x=902.13, y=48.13, z=282.38], EntityItem['item.item.dyePowder.black'/215, l='MpServer', x=900.69, y=50.13, z=285.00], EntityItem['item.item.dyePowder.black'/216, l='MpServer', x=900.78, y=49.13, z=281.56]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2555)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:973)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 8.1 (amd64) version 6.3
+	Java Version: 1.8.0_51, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 745142576 bytes (710 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.85.1286 Minecraft Forge 10.13.2.1286 4 mods loaded, 4 mods active
+	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	FML{7.10.85.1286} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Forge{10.13.2.1286} [Minecraft Forge] (forgeSrc-1.7.10-10.13.2.1286.jar) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Venom{0.1} [Venom] (bin) Unloaded->Constructed->Pre-initialized->Initialized->Post-initialized->Available->Available->Available->Available
+	Launched Version: 1.7.10
+	LWJGL: 2.9.1
+	OpenGL: GeForce GTX 980/PCIe/SSE2 GL version 4.5.0 NVIDIA 355.60, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: On (16)

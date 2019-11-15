@@ -1,0 +1,931 @@
+package com.blaxout1213.dayz;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.lwjgl.opengl.GL11;
+
+import com.blaxout1213.dayz.bitcoin.BitcoinBase;
+import com.blaxout1213.dayz.bloodbags.BloodBag;
+import com.blaxout1213.dayz.managers.EverythingManager;
+import com.blaxout1213.dayz.managers.LivingBaseManager;
+import com.blaxout1213.dayz.managers.TempetureManager;
+import com.blaxout1213.dayz.managers.WetnessManager;
+import com.blaxout1213.dayz.packet.SyncProperties;
+import com.blaxout1213.dayz.packet.SyncPropertiesPacket;
+import com.blaxout1213.entity.EntityCorruptedZombie;
+import com.blaxout1213.entity.EntityPoisonSpider;
+import com.blaxout1213.entity.EntitySuicideSpider;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import dayz.proxy.CommonProxy;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.DataWatcher;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.FoodStats;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovementInput;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.TempCategory;
+import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.EntityInteractEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.WorldEvent;
+
+public class PlayerStalker
+{
+    public World worldObj;
+    
+    
+    public ArrayList<BiomeGenBase> veryColdBiomes = new ArrayList();
+    public ArrayList<BiomeGenBase> coldBiomes = new ArrayList();
+    public ArrayList<BiomeGenBase> coolBiomes = new ArrayList();
+    public ArrayList<BiomeGenBase> warmBiomes = new ArrayList();
+    public ArrayList<BiomeGenBase> hotBiomes = new ArrayList();
+	private Random rand;
+	private CommonProxy proxy;
+	protected BrokenlimbsManager brokenLimbs = new BrokenlimbsManager();
+	protected SickneesManager sickness = new SickneesManager();
+	protected WetnessManager wet = new WetnessManager();
+	protected TempetureManager tempeture = new TempetureManager();
+	protected LivingBaseManager elbm = new LivingBaseManager();
+	protected EverythingManager everything = new EverythingManager();
+	public BiomeGenBase biome4;
+	private int lastHurt;
+	private int update;
+	private int resistanceTimer;
+	private int resistanceAdd;
+	private int packetUpdateTimer;
+	private int watertimer;
+	private int watertimer2;
+	private int hurtz;
+	private int bleedout;
+	private boolean bonfire;
+	private int bonfirecooldown;
+	private int healz;
+	private int targetTemp;
+	private int temptimer;
+	private int heat;
+	private boolean inSun;
+	private int sunCooldown;
+	private int TTemp;
+	private int tempchange;
+	private int biomeTimer;
+	private int posY;
+	private int posX;
+	private int posZ;
+	private int range;
+	private int moonPhase;
+
+
+	public static boolean daytime;
+    private void generateRandomParticles(String par1Str, EntityPlayer ep)
+    {
+        for (int i = 0; i < 5; ++i)
+        {
+            double d0 = this.rand.nextGaussian() * 0.02D;
+            double d1 = this.rand.nextGaussian() * 0.02D;
+            double d2 = this.rand.nextGaussian() * 0.02D;
+            ep.worldObj.spawnParticle(par1Str, this.posX + (double)(this.rand.nextFloat() * ep.width * 2.0F) - (double)ep.width, this.posY + 1.0D + (double)(this.rand.nextFloat() * ep.height), this.posZ + (double)(this.rand.nextFloat() * ep.width * 2.0F) - (double)ep.width, d0, d1, d2);
+        }
+    }
+    public static void makeRain(World world)
+    {
+    	world.getWorldInfo().setRaining(true);
+    	world.getWorldInfo().setRainTime(600);
+    }
+    public boolean isKO(EntityPlayer ep)
+    {
+    	if(ep.getDataWatcher().getWatchableObjectInt(26)/20 > (int)ep.getHealth())
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+	//private float damageSufferd;
+	@SubscribeEvent
+	public void onLivingHurtEvent(LivingHurtEvent event)
+	{
+		this.rand = new Random();
+		//damageSufferd = event.ammount;
+		if(event.entity instanceof EntityPlayer)
+		{
+			lastHurt = (int)event.ammount*2;
+		}
+	}
+	@SubscribeEvent
+	public void jump(LivingJumpEvent event)
+	{
+		if(event.entity instanceof EntityPlayer)
+		{
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			
+		}
+	}
+	@SubscribeEvent
+	public void onEntityConstructing(EntityConstructing event)
+	{
+		this.rand = new Random();
+		if (event.entity instanceof EntityPlayer)
+		{
+			/** Blood type int to value
+			 * O-	0
+			 * O+	1
+			 * A-	2
+			 * A+	3
+			 * B-	4
+			 * B+	5
+			 * AB-	6
+			 * AB+	7	
+			 */
+			//&& ExtendedPlayer.get((EntityPlayer) event.entity) == null
+			//ExtendedPlayer.register((EntityPlayer) event.entity);
+	        DataWatcher dw = event.entity.getDataWatcher();
+	        int type = rand.nextInt(8);	        
+        	dw.addObject(24, Integer.valueOf(30)); // Tempeture
+	        dw.addObject(20, Integer.valueOf(0));//active venom	
+	        dw.addObject(21, Integer.valueOf(0));//active venom time
+	        dw.addObject(22, Float.valueOf(0.2F));
+			dw.addObject(23, Integer.valueOf(0));
+			dw.addObject(25, Integer.valueOf(0));
+			dw.addObject(26, Integer.valueOf(0)); // Shock- used for KO
+			dw.addObject(27, Integer.valueOf(10));
+	        ExtendedPlayer.register((EntityPlayer) event.entity);
+		}
+		if (event.entity instanceof EntityLiving)
+		{
+			DataWatcher dw = event.entity.getDataWatcher();
+			dw.addObject(30, Integer.valueOf(0));
+	        //ExtendedMob.register((EntityLiving) event.entity);
+		}
+
+	}
+	@SubscribeEvent
+	public void playerPickup(EntityItemPickupEvent event)
+	{
+		if(UtilMisc.isKO(event.entityPlayer))
+		{
+			event.setCanceled(true);
+		}
+	}
+	@SubscribeEvent
+	public void playerWakeUp(PlayerWakeUpEvent event)
+	{
+		ExtendedPlayer props = ExtendedPlayer.get(event.entityPlayer);
+		DataWatcher dw = event.entityPlayer.getDataWatcher();
+		if(dw.getWatchableObjectInt(27) < 15)
+		{
+			System.out.println("test");
+			if(props.wellnessCD("get", 0) <= 0)
+			{
+				dw.updateObject(27, dw.getWatchableObjectInt(27) + 1);
+				event.entityPlayer.heal(2);
+				props.wellnessCD("set", 12000);
+			}
+		}
+		else if(dw.getWatchableObjectInt(27) > 15)
+		{
+			if(props.wellnessCD("get", 0) <= 0)
+			{
+				event.entityPlayer.heal(2);
+				event.entityPlayer.setAbsorptionAmount(event.entityPlayer.getAbsorptionAmount() + 2F);
+				props.wellnessCD("set", 12000);
+			}
+		}
+		
+	}
+	@SubscribeEvent
+	public void itemExpireEvent(ItemExpireEvent event)
+	{
+		if(event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinWood) 
+		|| event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinBronze) 
+		|| event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinSilver) 
+		|| event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinGold) 
+		|| event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinPlatnium) 
+		|| event.entityItem.getEntityItem() == new ItemStack(DayzMod.bitcoinOrange))
+		{
+			event.extraLife = 60*60*20;
+			event.setCanceled(true);
+		}
+	}
+	@SubscribeEvent
+	public void onMobDropEvent(LivingDropsEvent event)
+	{
+		Entity entity = event.entity;
+		World world = entity.worldObj;
+		ItemStack itemstack1 = new ItemStack(DayzMod.bitcoinWood);
+		EntityItem entityitem = new EntityItem(world, (double)event.entity.posX, (double)event.entity.posY, (double)event.entity.posZ, itemstack1);
+		if(entity instanceof EntityMob && rand.nextInt(3) <= 0 + event.lootingLevel)
+		{
+			world.playSound(entity.posX, entity.posY, entity.posZ, "dayz:razorsharp", 1F, 1F, true);
+			if(!world.isRemote)
+			{
+				entity.dropItem(DayzMod.bitcoinWood, 1);
+			}
+		}
+		
+		if(event.entity instanceof EntityZombie)
+		{
+			EntityZombie ez = (EntityZombie) event.entity;
+			ItemStack item = ez.getEquipmentInSlot(0);
+			if(item != null)
+			{
+				/*
+				if(item.getItem() == DayzMod.nightStick)
+				{
+					ez.dropItem(item.getItem(), 1);
+				}
+				*/
+				if(item.getItem() == DayzMod.envenomedSword)
+				{
+					if(rand.nextInt(30) == 0)
+					{
+						ez.dropItem(DayzMod.antidote, 1);
+					}
+				}
+			}
+			if(rand.nextInt(32) == 0)
+			{
+				ez.dropItem(DayzMod.bloodBagRandom, 1);
+			}
+		}
+		if(UtilMisc.getMoonPhase(world.getWorldTime()) == 1)
+		{
+			if(event.entity instanceof EntityZombie)
+			{
+				 EntityZombie ez = (EntityZombie) event.entity;
+				 EntityZombie ez1 = new EntityZombie(world);
+				 EntityPigZombie zp = new EntityPigZombie(world);
+				 ez1.setChild(false);
+				 if(rand.nextFloat() <= 0.75F)
+				 {
+					 ez1.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_sword));
+					 zp.setCurrentItemOrArmor(0, new ItemStack(Items.wooden_sword));
+				 }
+				 else
+				 {
+					 ez1.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));
+					 zp.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));
+				 }
+				 ez1.setPosition(ez.posX, ez.posY, ez.posZ);
+				 double maxHealth = ez.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
+				 ez1.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth - 1D);
+				 zp.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth - 1D);
+				 ez1.setHealth((float) ez1.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
+				 zp.setHealth((float) ez1.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue());
+				 zp.setPosition(ez.posX, ez.posY, ez.posZ);
+				 if(rand.nextFloat() <= 0.05F && maxHealth >= 2D)
+				 {
+					 world.spawnEntityInWorld(zp);
+				 }
+				 else if(maxHealth >= 2D && rand.nextFloat() <= 0.75F)
+				 {
+					 world.spawnEntityInWorld(ez1);
+				 } 
+			}
+		}
+
+	}
+	@SubscribeEvent
+	public void onDeathEvent(LivingDeathEvent event)
+	{
+		if(event.entity instanceof EntityLiving)
+		{
+			if(event.source == DayzMod.wet)
+			{
+				ItemStack itemstack1 = new ItemStack(Items.bone);
+				EntityItem entityitem = new EntityItem(event.entity.worldObj, (double)event.entity.posX, (double)event.entity.posY, (double)event.entity.posZ, itemstack1);
+				entityitem.lifespan = 60*20;
+				event.entity.worldObj.spawnEntityInWorld(entityitem);
+			}
+		}
+		if(event.entity instanceof EntityPlayer)
+		{
+			DataWatcher dw = event.entity.getDataWatcher();
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
+			if(dw.getWatchableObjectInt(27) > 10)
+			{
+				dw.updateObject(27, 10);
+			}
+			if(dw.getWatchableObjectInt(27) > 3)
+			{
+				dw.updateObject(27, dw.getWatchableObjectInt(27) - ep.worldObj.difficultySetting.getDifficultyId());
+			}
+			if(event.source == DamageSource.outOfWorld)
+			{
+				EntityPlayer ez = (EntityPlayer) event.entity;
+				World world = event.entity.worldObj;
+				EntitySuicideSpider ez1 = new EntitySuicideSpider(world);
+				ez1.setPosition(ez.posX, ez.posY, ez.posZ);
+				world.spawnEntityInWorld(ez1);
+			}
+			if(event.source == DayzMod.zombieInfection || event.entity.getDataWatcher().getWatchableObjectInt(20) == 4)
+			{
+				EntityPlayer ez = (EntityPlayer) event.entity;
+				World world = event.entity.worldObj;
+				EntityCorruptedZombie ez1 = new EntityCorruptedZombie(world);
+				ez1.setPosition(ez.posX, ez.posY, ez.posZ);
+				world.spawnEntityInWorld(ez1);
+			}
+			if(!event.entity.worldObj.isRemote)
+			{
+				proxy.storeEntityData(((EntityPlayer) event.entity).getCommandSenderName(), dw.getWatchableObjectInt(27));
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onFallEvent(LivingFallEvent event)
+	{
+		if(event.entity instanceof EntityPlayer)
+		{
+		}
+	}
+	@SubscribeEvent
+	public void entityRespawn(EntityJoinWorldEvent event)
+	{
+		World world = event.entity.worldObj;
+		//int phase = event.entity.worldObj.getMoonPhase();
+		if(event.entity instanceof EntityPlayer && UtilMisc.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && world instanceof WorldServer && event.entity.dimension == 0)
+		{
+			MinecraftServer minecraftserver = ((WorldServer)world).func_73046_m();
+			Entity e = event.entity;
+			//event.entity.travelToDimension(-1);
+			//((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(CustomPotion.netherBound.id, 40,0));
+		}
+		if(event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote)
+		{
+			int playerData = -127;
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			if(proxy.getHashMap().containsKey(((EntityPlayer) event.entity).getCommandSenderName()))
+			{
+				playerData = proxy.getEntityData(((EntityPlayer) event.entity).getCommandSenderName());
+			}
+			if(playerData != -127)
+			{
+				NBTTagCompound tags = ep.getEntityData();
+				event.entity.getDataWatcher().updateObject(27, playerData);
+			}
+		}
+		if(event.entity instanceof EntityPlayer && UtilMisc.getMoonPhase(world.getWorldTime()) == 4 && !world.isDaytime() && world instanceof WorldServer)
+		{
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			ExtendedPlayer props = ExtendedPlayer.get(ep);
+			if(props.nether("get", true) == true && ep.dimension == 0)
+			{
+				((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(CustomPotion.netherBound.id, 40,0));
+			}
+		}
+		if(event.entity instanceof EntityPoisonSpider)
+		{
+			System.out.println("Spider spawned");
+		}
+		if(event.entity instanceof EntityZombie && !event.entity.worldObj.isRemote)
+		{
+			 EntityZombie ez = (EntityZombie) event.entity;
+			 ItemStack item = ez.getEquipmentInSlot(0);
+			 if(item == null && rand.nextFloat() <= event.entity.worldObj.getCurrentMoonPhaseFactor() * 0.1F)
+			 {
+				 ez.setCanPickUpLoot(false);
+				 ez.setCurrentItemOrArmor(0, new ItemStack(DayzMod.envenomedSword));
+				 ez.setEquipmentDropChance(0, 1.0F);
+				 
+			 }
+			 else if(item == null && rand.nextFloat() <= 0.01F)
+			 {
+				 ez.setCanPickUpLoot(false);
+				 ez.setCurrentItemOrArmor(0, new ItemStack(DayzMod.nightStick));
+				 ez.setEquipmentDropChance(0, 1.0F);
+			 }
+			 else if(UtilMisc.getMoonPhase(world.getWorldTime()) == 7)
+			 {
+				 ez.setCanPickUpLoot(false);
+				 ez.setCurrentItemOrArmor(0, new ItemStack(DayzMod.woodnightStick));
+				 ez.setEquipmentDropChance(0, 1.0F);
+			 }
+			 else
+			 {
+				 ez.setCanPickUpLoot(true);
+			 }
+		}
+		if(UtilMisc.getMoonPhase(world.getWorldTime()) == 2)
+		{
+			if(event.entity instanceof EntitySkeleton)
+			{
+				 EntitySkeleton ez = (EntitySkeleton) event.entity;
+				 ItemStack item = ez.getEquipmentInSlot(3);
+				 if(item == null)
+				 {
+					 ez.setCurrentItemOrArmor(3, new ItemStack(Items.diamond_chestplate));
+					 ez.setEquipmentDropChance(3, 0F);
+				 }
+			}
+		}
+		
+	}
+    @SideOnly(Side.CLIENT)
+    protected void knockout(int par1, int par2)
+    {
+    	ResourceLocation hd = new ResourceLocation("dayz:textures/gui/kohddetail.png");
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(hd);
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(0.0D, (double)par2, -90.0D, 0.0D, 1.0D);
+        tessellator.addVertexWithUV((double)par1, (double)par2, -90.0D, 1.0D, 1.0D);
+        tessellator.addVertexWithUV((double)par1, 0.0D, -90.0D, 1.0D, 0.0D);
+        tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
+        tessellator.draw();
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+	@SubscribeEvent
+	public void onAttackedEvent(LivingAttackEvent event)
+	{	
+		if(event.entity instanceof EntityPlayer)
+		{
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
+			DataWatcher dw = event.entity.getDataWatcher();
+			//DataWatcher dws = event.source.getEntity().getDataWatcher();
+			if(event.source == DamageSource.starve || event.source == DamageSource.drown || event.source == DamageSource.anvil)
+			{
+				dw.updateObject(26, (int)ep.getHealth()*20 + 3*20);
+			}
+			if(this.isKO(ep) && event.source == DamageSource.inWall && ep.ridingEntity != null)
+			{
+				event.setCanceled(true);
+			}
+			if(event.ammount > 0 && rand.nextInt(4) == 0)
+			{
+				int diff = (int) ((int)dw.getWatchableObjectInt(26) + 20 * UtilMisc.getDifficultyMod(event.entity.worldObj));
+				dw.updateObject(26, diff);
+			}
+			if(event.source == DamageSource.fall)
+			{
+				dw.updateObject(26, dw.getWatchableObjectInt(26) + (int)event.ammount*10);
+				if(rand.nextInt(3) == 0)
+				{
+					int add = (int) ((int) (event.ammount * 600)*UtilMisc.getDifficultyMod(event.entity.worldObj));
+					props.brokenLeg("add", add);
+					System.out.println("Added: " + add);
+				}
+			}
+			if(event.source.getEntity() instanceof EntityZombie)
+			{
+				//EntityPlayer ep = (EntityPlayer) event.entity;
+				EntityZombie ez = (EntityZombie) event.source.getEntity();
+				ItemStack item = ez.getEquipmentInSlot(0);
+				if(rand.nextInt(50) == 0)
+				{
+					((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(CustomPotion.illness.id, 3600,0));
+				}
+				if(item != null && item.getItem() == DayzMod.envenomedSword && dw.getWatchableObjectInt(20) == 0)
+				{
+					Object Time = 7200 + rand.nextInt(4800);
+					dw.updateObject(21, Time);
+					dw.updateObject(20, 1);
+				}
+				if(item != null && (item.getItem() == DayzMod.nightStick || item.getItem() == DayzMod.woodnightStick) && dw.getWatchableObjectInt(26) *20 < ep.getHealth())
+				{
+					Object update = dw.getWatchableObjectInt(26) + (((int)ep.getHealth() + 2)*20);
+					dw.updateObject(26,  update);
+					if(rand.nextInt(100) == 0)
+					{
+						double x = ep.posX + ep.getRNG().nextInt(500) - ep.getRNG().nextInt(500);
+						double z = ep.posZ + ep.getRNG().nextInt(500) - ep.getRNG().nextInt(500);
+						UtilMisc.teleportPlayer(ep, x, z);
+					}
+				}
+			}
+			if(event.source.getEntity() != null && this.isKO(ep))
+			{
+				ep.inventory.dropAllItems();
+			}
+			if(event.source.getEntity() != null && event.ammount > 0F)
+			{
+				int bleed = (int) (rand.nextInt((int) event.ammount + 1) * UtilMisc.getDifficultyMod(event.entity.worldObj));
+				if(bleed > props.bleed("get", 0) && rand.nextInt(10) == 0)
+				{
+					props.bleed("set", bleed);
+					if(props.bleed("get", 0) >= 5 && !event.entity.worldObj.isRemote)
+					{
+						((EntityPlayer) event.entity).addChatComponentMessage(new ChatComponentTranslation("bleed.bad" + rand.nextInt(3), new Object[0]));
+					}
+					else if(!event.entity.worldObj.isRemote)
+					{
+						((EntityPlayer) event.entity).addChatComponentMessage(new ChatComponentTranslation("bleed.normal" + rand.nextInt(3), new Object[0]));
+					}
+				}
+			}
+			if(event.source.getEntity() instanceof EntityCaveSpider && dw.getWatchableObjectInt(20) == 0)
+			{
+				Object Time = 7200 + rand.nextInt(4800);
+				dw.updateObject(21, Time);
+				dw.updateObject(20, 1);
+			}
+			if(event.source.getEntity() instanceof EntitySpider && dw.getWatchableObjectInt(20) == 0 && rand.nextInt(12) == 0 && !(event.source.getEntity() instanceof EntityPoisonSpider))
+			{
+				Object Time = 24000 + rand.nextInt(12000);
+				dw.updateObject(21, Time);
+				dw.updateObject(20, 3);
+			}
+			if(event.source.getEntity() instanceof EntityZombie && dw.getWatchableObjectInt(20) == 0 && rand.nextInt(DayzMod.corruptChance) == 0)
+			{
+				Object Time = 1200 + rand.nextInt(1200);
+				dw.updateObject(21, Time);
+				dw.updateObject(20, 4);
+			}
+			/*
+			if(event.source.getEntity() instanceof EntityPlayer && dws.getWatchableObjectInt(21) <= 1200 && dws.getWatchableObjectInt(20) == 1)
+			{
+				event.setCanceled(true);
+			}
+			*/
+		}
+
+	}
+	//@SubscribeEvent
+	public void onHeal(LivingHealEvent event)
+	{
+		if(event.entity instanceof EntityPlayer)
+		{
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
+			if(props.bleed("get", 0) > 0 || props.badBlood("get", false))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onBlockBroken(BreakEvent event)
+	{
+		if(event.getPlayer().getDataWatcher().getWatchableObjectInt(26)/20 > event.getPlayer().getHealth())
+		{
+			event.setCanceled(true);
+		}
+	}
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onUpdate2Event(LivingUpdateEvent event)
+	{
+		if(event.entity instanceof EntityPlayer)
+		{
+			EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
+			DataWatcher dw = event.entity.getDataWatcher();
+			if(((dw.getWatchableObjectInt(20) == 1 && dw.getWatchableObjectInt(21) <= 1200)))
+			{
+				ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
+				player.movementInput = new BlockMovement(player.movementInput);
+				//((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 1800 ,50));
+			}
+			else if(this.isKO(player))
+			{
+				ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
+				player.movementInput = new BlockMovement(player.movementInput);
+				//((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 1800 ,50));
+			}
+			else
+			{
+				player.movementInput = player.movementInput;
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onPlayerAttack(AttackEntityEvent event)
+	{
+		DataWatcher dw = event.entityPlayer.getDataWatcher();
+		ItemStack item = event.entityPlayer.getHeldItem();
+		if(this.isKO(event.entityPlayer))
+		{
+			event.setCanceled(true);
+		}
+		if(item != null)
+		{
+		}
+	}
+	@SubscribeEvent(priority=EventPriority.HIGHEST)
+	public void onUpdateEvent(LivingUpdateEvent event)
+	{
+		if(event.entity instanceof EntityLivingBase)
+		{
+			elbm.onUpdate((EntityLivingBase) event.entity, event.entity.worldObj);
+		}
+		if(event.entity instanceof EntityLiving && !(event.entity instanceof EntityPlayer) && !(event.entity instanceof EntitySquid))
+		{
+			int x = MathHelper.floor_double(event.entity.posX);
+			int y = MathHelper.floor_double(event.entity.posY);
+			int z = MathHelper.floor_double(event.entity.posZ);
+			//ExtendedMob props = ExtendedMob.get((EntityLiving) event.entity);
+			DataWatcher dw = event.entity.getDataWatcher();
+			EntityLiving ep = (EntityLiving) event.entity;
+			Block blockID = event.entity.worldObj.getBlock(x, y, z);
+			Block blockID2 = event.entity.worldObj.getBlock(x, y - 1, z);
+			Chunk chunk = ep.worldObj.getChunkFromBlockCoords(x, z);
+			BiomeGenBase biomegenbase2 = chunk.getBiomeGenForWorldCoords(x & 15, z & 15, ep.worldObj.getWorldChunkManager());
+			NBTTagCompound tags = event.entity.getEntityData();
+			dw.updateObject(30, tags.getInteger("Wet"));
+			if(ep.isInWater() == false && ep.isWet() && ep.getEquipmentInSlot(4) != null)
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) + 1);
+			}
+			else if(ep.isInWater() == false && ep.isWet())
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) + 2);
+			}
+			else if(ep.isInWater())
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) + 33);
+			}
+			else if(blockID == Blocks.snow_layer || blockID2 == Blocks.snow)
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) + 2);
+			}
+			else if((biomegenbase2 == BiomeGenBase.jungle || biomegenbase2 == BiomeGenBase.jungleHills) && ep.worldObj.canBlockSeeTheSky(x, y, z))
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) + 1);
+			}
+			else if(dw.getWatchableObjectInt(30) > 0)
+			{
+				dw.updateObject(30, dw.getWatchableObjectInt(30) - 1);
+			}
+			if(dw.getWatchableObjectInt(30)/20 > 300)
+			{
+				int power = Math.min(((dw.getWatchableObjectInt(30)/20) / 300) - 1, 4);
+				((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 300 ,power));
+				((EntityLivingBase)event.entity).addPotionEffect(new PotionEffect(Potion.weakness.id, 300 ,power));
+				if(dw.getWatchableObjectInt(30)/20 > 1500 && event.entity.worldObj.getWorldTime() % 40 == 0)
+				{
+					float damage = (dw.getWatchableObjectInt(30)/20) / 100;
+					event.entity.attackEntityFrom(DayzMod.wet, 1);
+				}
+			}
+			tags.setInteger("Wet", dw.getWatchableObjectInt(30));
+		}
+		if(event.entity instanceof EntityPlayer)
+		{
+			int x = (int)event.entity.posX;
+			int y = (int)event.entity.posY;
+			int z = (int)event.entity.posZ;
+			EntityPlayer ep = (EntityPlayer) event.entity;
+			Chunk chunk = event.entity.worldObj.getChunkFromBlockCoords(x, z);
+			BiomeGenBase biome = chunk.getBiomeGenForWorldCoords(x & 15, z & 15, event.entity.worldObj.getWorldChunkManager());
+			wet.onUpdate((EntityPlayer) event.entity);
+			tempeture.onUpdate((EntityPlayer) event.entity, biome.temperature);
+			everything.onUpdate((EntityPlayer) event.entity, event.entity.worldObj);
+			biome4 = biome;
+			if(this.isKO(ep))
+			{
+				float rndX = (((EntityLivingBase) ep).getRNG().nextFloat() * ep.width * 2) - ep.width;
+				float rndY = ((EntityLivingBase) ep).getRNG().nextFloat() * ep.height;
+				float rndZ = (((EntityLivingBase) ep).getRNG().nextFloat() * ep.width * 2) - ep.width;
+				//rndY = -rndY;
+		    	int c;
+		        for (c = 0; c < 2; ++c)
+		        {
+		            ep.worldObj.spawnParticle("snowshovel", ep.posX + (rand.nextDouble() - 0.5D) * (double)ep.width, ep.posY + rand.nextDouble() * (double)ep.height - 0.25D, ep.posZ + (rand.nextDouble() - 0.5D) * (double)ep.width, (rand.nextDouble() - 0.5D) * 2.0D, -rand.nextDouble(), (rand.nextDouble() - 0.5D) * 2.0D);
+		        }
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onConsumeEvent(PlayerInteractEvent event)
+	{
+		ItemStack item = event.entityPlayer.getCurrentEquippedItem();
+		if(event.getResult() != Result.DENY && (event.action == Action.RIGHT_CLICK_BLOCK || event.action == Action.RIGHT_CLICK_AIR))
+		{
+			if(this.isKO(event.entityPlayer))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onEntityInteract(EntityInteractEvent event)
+	{
+		if(event.target!= null && event.target instanceof EntityPlayer)
+		{
+			EntityPlayer rightclicker = event.entityPlayer;
+			EntityPlayer clicked = (EntityPlayer) event.target;
+			if(this.isKO(clicked) && clicked.ridingEntity == null && !rightclicker.isSneaking())
+			{
+				clicked.mountEntity(rightclicker);
+			}
+			else if(this.isKO(clicked) && clicked.ridingEntity != null && rightclicker.isSneaking())
+			{
+				clicked.mountEntity(null);
+			}
+		}
+
+	}
+    private void renderInsideOfBlock(float p_78446_1_, IIcon p_78446_2_)
+    {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+        Tessellator tessellator = Tessellator.instance;
+        float f1 = 0.1F;
+        GL11.glColor4f(f1, f1, f1, 0.5F);
+        GL11.glPushMatrix();
+        float f2 = -1.0F;
+        float f3 = 1.0F;
+        float f4 = -1.0F;
+        float f5 = 1.0F;
+        float f6 = -0.5F;
+        float f7 = p_78446_2_.getMinU();
+        float f8 = p_78446_2_.getMaxU();
+        float f9 = p_78446_2_.getMinV();
+        float f10 = p_78446_2_.getMaxV();
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)f2, (double)f4, (double)f6, (double)f8, (double)f10);
+        tessellator.addVertexWithUV((double)f3, (double)f4, (double)f6, (double)f7, (double)f10);
+        tessellator.addVertexWithUV((double)f3, (double)f5, (double)f6, (double)f7, (double)f9);
+        tessellator.addVertexWithUV((double)f2, (double)f5, (double)f6, (double)f8, (double)f9);
+        tessellator.draw();
+        GL11.glPopMatrix();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void onRenderGameOverlay(RenderGameOverlayEvent.Text event) 
+	{	
+		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer player = mc.thePlayer;
+		
+		//ExtendedPlayer props = ExtendedPlayer.get(mc.thePlayer);
+		DataWatcher dw = mc.thePlayer.getDataWatcher();
+		ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) player);
+		//BiomeGenBase biomegenbase2 = player.worldObj.getWorldChunkManager().getBiomeGenAt((int)player.posX, (int)player.posZ);
+		float healthPercent = player.getHealth() / player.getMaxHealth();
+		float phase = player.worldObj.getCurrentMoonPhaseFactor();
+		if(!(dw.getWatchableObjectInt(26)/20 > player.getHealth()))
+		{
+			if(mc.gameSettings.showDebugInfo)
+			{
+				int TTemp = props.TTemp("get", 0) + 3;
+				event.right.add("");
+				//event.right.add("Timer:" + this.temptimer + " Factored:" + this.temptimer % 20 * 12);
+				event.right.add("Target tempeture: " + props.targetTemp("get", 0) + " TTEMP: "+ TTemp);
+				event.right.add("Current tempeture: " + dw.getWatchableObjectInt(24) + " Biome temp: " + biome4.temperature);
+				event.right.add("Moon phase: " + player.worldObj.getMoonPhase() + " Phase factor: " + phase);
+				event.right.add("Wellness: " + dw.getWatchableObjectInt(27));
+				event.right.add("Feet health: " + props.feetHealth("get", 0));
+				event.right.add("Health CD: " + props.wellnessCD("get", 0) + " Broken Leg: " + props.brokenLeg("get", 0));
+				//event.right.add("VCold: " + veryCold + " Cold: " + cold + " Cool: " + cool + " Warm: " + warm + " Hot: " + hot);
+				//event.right.add("PosX: " + posX + " PosZ: " + posZ);
+			}
+			if(props.bloodKnown())
+			{
+				event.right.add("Blood Type: " + UtilMisc.bloodTypeString(props.getBloodType()));
+			}
+			event.left.add("Resistance: " + dw.getWatchableObjectFloat(22));
+			event.left.add("Shock: " + dw.getWatchableObjectInt(26) + " ("+dw.getWatchableObjectInt(26)/20 +")");
+			if(props.bleed("get", 0) > 0)
+			{
+				event.right.add("\u00A74Bleeding!");
+			}
+			if(props.brokenLeg("get", 0) > 0)
+			{
+				{
+					event.right.add("\u00A74Broken leg");
+				}
+			}
+			if(dw.getWatchableObjectInt(24) < 0)
+			{
+				event.left.add("\u00A7bFreezing");
+			}
+			else if(dw.getWatchableObjectInt(24) < 5*20)
+			{
+				event.left.add("\u00A79Very Cold");
+			}
+			else if(dw.getWatchableObjectInt(24) < 25*20)
+			{
+				event.left.add("\u00A79Cold");
+			}
+			else if(dw.getWatchableObjectInt(24) < 40*20)
+			{
+				event.left.add("\u00A7eCool");
+			}
+			else if(dw.getWatchableObjectInt(24) < 70*20)
+			{
+				event.left.add("\u00A76Warm");
+			}
+			else
+			{
+				event.left.add("\u00A7cHot");
+			}
+			if(dw.getWatchableObjectInt(20) != 0)
+			{
+				event.left.add("\u00A7dTime left: \u00A7d" + (dw.getWatchableObjectInt(21)/20) + "s State:" + dw.getWatchableObjectInt(20));
+			}
+			if(dw.getWatchableObjectInt(24) > 1301)
+			{
+				event.right.add("\u00A7bSweating");
+			}
+			if(dw.getWatchableObjectInt(20) != 0)
+			{
+				event.right.add("\u00A7cFever");
+			}
+			if(dw.getWatchableObjectInt(25) > 0)
+			{
+				event.left.add("\u00A79Wetness: \u00A79" + dw.getWatchableObjectInt(25)/20);
+			}
+			/*
+			if (healthPercent <= 0.15F)
+			event.left.add("\u00A7cDying\u00A7r");
+			else if (healthPercent <= 0.3F)
+			event.left.add("\u00A7eInjured\u00A7r");
+			else if (healthPercent < 0.50F)
+			event.left.add("\u00A7fHurt\u00A7r");
+			*/
+		}
+        int k = event.resolution.getScaledWidth();
+        int l = event.resolution.getScaledHeight();
+        FontRenderer fontrenderer = mc.fontRenderer;
+        mc.entityRenderer.setupOverlayRendering();
+        GL11.glEnable(GL11.GL_BLEND);
+        if(mc.thePlayer.getDataWatcher().getWatchableObjectInt(26)/20 > mc.thePlayer.getHealth() && !mc.thePlayer.capabilities.isCreativeMode && !mc.thePlayer.isDead)
+        {	
+        	String stringToDisplay = "Shock: " + mc.thePlayer.getDataWatcher().getWatchableObjectInt(26)/20;
+        	String stringToDisplay2 = "Health: " + mc.thePlayer.getHealth();
+        	int k1 = (k - fontrenderer.getStringWidth(stringToDisplay)) / 2;
+        	int k2 = (k - fontrenderer.getStringWidth(stringToDisplay2)) / 2;
+        	this.renderInsideOfBlock(0F, Blocks.wool.getBlockTextureFromSide(2));
+        	knockout(k,l);
+        	fontrenderer.drawStringWithShadow(stringToDisplay, k1, l/2, 16777215);
+        	fontrenderer.drawStringWithShadow(stringToDisplay2, k2, l/2 - 30, 16777215);
+        	
+        }
+	}
+}
